@@ -1,2 +1,2 @@
-# CMB2-Field-Type-CS-Typography
+# cmb2-field-cs-typography
 Typography field type for CMB2
