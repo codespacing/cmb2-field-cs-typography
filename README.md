@@ -19,7 +19,7 @@ function cmb2_cs_typography_metabox() {
 	$cmb_demo->add_field( array(
 		'id' => $prefix . 'cs_typography',			
 		'name' => __( 'Typography', 'cmb2' ),
-		'description' => __( 'Field description', 'cmb2' ),
+		'desc' => __( 'Field description', 'cmb2' ),
 		'type' => 'cs_typography',
 		'options' => array(
 			'fields' => array(
