@@ -102,4 +102,4 @@ echo "}";
 <h2>Changelog</h2>
 
 <h3>1.0</h3>
-<ul><li>Inital commit</li></ul>
+<ul><li>Initial commit</li></ul>
