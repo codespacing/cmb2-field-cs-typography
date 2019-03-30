@@ -43,7 +43,6 @@ function cmb2_cs_typography_metabox() {
 	) );
 	
 }
-?>
 </pre>
 
 <hr />
