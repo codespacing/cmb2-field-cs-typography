@@ -4,7 +4,7 @@ Typography field type for <a href="https://github.com/CMB2/CMB2">CMB2</a>
 <hr />
 
 <h2>Example Declaration</h2>
-<pre>
+<?php
 add_action( 'cmb2_admin_init', 'cmb2_cs_typography_metabox' );
 function cmb2_cs_typography_metabox() {
 
@@ -42,7 +42,7 @@ function cmb2_cs_typography_metabox() {
 	) );
 	
 }
-</pre>
+?>
 
 <hr />
 
