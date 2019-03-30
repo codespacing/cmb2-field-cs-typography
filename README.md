@@ -50,7 +50,7 @@ function cmb2_cs_typography_metabox() {
 <pre>
 Array
 (
-    [google_font] => Actor
+    [google_font] => Alegreya+Sans+SC
     [backup_font] => sans-serif
     [font_weight] => bold
     [text_align] => left
