@@ -3,12 +3,37 @@ Typography field type for <a href="https://github.com/CMB2/CMB2">CMB2</a>
 
 <hr />
 
-<h2>Example Declaration</h2>
-
+<h2>Example declaration</h2>
+<pre>
+$your_cmb_matabox->add_field(array(
+	'id' => $prefix . 'cs_typography',			
+	'name' => __( 'Typography', 'cmb2' ),
+	'desc' => __( 'Field description', 'cmb2' ),
+	'type' => 'cs_typography',
+	'options' => array(
+		'fields' => array(
+			'google-font' => true,
+			'backup-font' => true,
+			'font-weight' => true,
+			'text-align' => true,
+			'writing-mode' => true,
+			'text-orientation' => true,
+			'direction' => true,
+			'text-transform' => true,
+			'font-style' => true,
+			'font-size' => true,
+			'line-height' => true,
+			'letter-spacing' => true,
+			'color' => true,
+		),
+		'preview' => true, // Show/Hide the "preview text" area
+	),
+));
+</pre>
 
 <hr />
 
-<h2>Output array</h2>
+<h2>Return values</h2>
 <pre>
 Array
 (
@@ -36,7 +61,7 @@ Array
 
 <hr />
 
-<h2>Example Usage</h2>
+<h2>Example</h2>
 <pre>
 <?php
 $h1_style = get_post_meta( get_the_ID(), 'your_field_id' );
