@@ -382,6 +382,9 @@ if(!class_exists('CS_CMB2_Typography_Field')){
 							
 			<?php         
 	
+			if(!empty($field->args('desc')))
+				echo '<p class="cmb2-metabox-description">'.$field->args('desc').'</p>';
+			
 		}
 		
 		
