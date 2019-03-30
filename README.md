@@ -41,7 +41,6 @@ function cmb2_cs_typography_metabox() {
 			'preview' => true, // Show/Hide the "preview text" area
 		),
 	) );
-	
 }
 </pre>
 
@@ -77,6 +76,7 @@ Array
 
 <h2>Example Usage</h2>
 <pre>
+<?php
 $h1_style = get_post_meta( get_the_ID(), 'your_field_id' );
 
 echo "h1{";
