@@ -37,10 +37,10 @@ function cmb2_cs_typography_metabox() {
 				'letter-spacing' => true,
 				'color' => true,
 			),
-			'preview' => true,
+			'preview' => true, // Show/Hide the "preview text" area
 		),
 	) );
-
+	
 }
 </pre>
 
