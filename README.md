@@ -4,45 +4,7 @@ Typography field type for <a href="https://github.com/CMB2/CMB2">CMB2</a>
 <hr />
 
 <h2>Example Declaration</h2>
-<pre>
-<?php
-add_action( 'cmb2_admin_init', 'cmb2_cs_typography_metabox' );
-function cmb2_cs_typography_metabox() {
 
-	$prefix = 'yourprefix_demo_';
-
-	$cmb_demo = new_cmb2_box( array(
-		'id'            => $prefix . 'metabox',
-		'title'         => __( 'Test Metabox', 'cmb2' ),
-		'object_types'  => array( 'page', 'post' ), // Post type
-	) );
-
-	$cmb_demo->add_field( array(
-		'id' => $prefix . 'cs_typography',			
-		'name' => __( 'Typography', 'cmb2' ),
-		'desc' => __( 'Field description', 'cmb2' ),
-		'type' => 'cs_typography',
-		'options' => array(
-			'fields' => array(
-				'google-font' => true,
-				'backup-font' => true,
-				'font-weight' => true,
-				'text-align' => true,
-				'writing-mode' => true,
-				'text-orientation' => true,
-				'direction' => true,
-				'text-transform' => true,
-				'font-style' => true,
-				'font-size' => true,
-				'line-height' => true,
-				'letter-spacing' => true,
-				'color' => true,
-			),
-			'preview' => true, // Show/Hide the "preview text" area
-		),
-	) );
-}
-</pre>
 
 <hr />
 
