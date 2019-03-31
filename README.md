@@ -1,10 +1,9 @@
 # cmb2-field-cs-typography
 Typography field type for <a href="https://github.com/CMB2/CMB2">CMB2</a>
 
-<hr />
+## Example declaration
 
-<h2>Example declaration</h2>
-<pre>
+```php
 $your_cmb_matabox->add_field(array(
 	'id' => $prefix . 'cs_typography',			
 	'name' => __( 'Typography', 'cmb2' ),
@@ -29,11 +28,10 @@ $your_cmb_matabox->add_field(array(
 		'preview' => true, // Show/Hide the "preview text" area
 	),
 ));
-</pre>
+```
 
-<hr />
+## Return values
 
-<h2>Return values</h2>
 <pre>
 Array
 (
@@ -59,11 +57,9 @@ Array
 )
 </pre>
 
-<hr />
+## Example
 
-<h2>Example</h2>
-<pre>
-<?php
+```php
 $h1_style = get_post_meta( get_the_ID(), 'your_field_id' );
 
 echo "h1{";
@@ -80,14 +76,13 @@ echo "h1{";
     echo "letter-spacing: " . $h1_style['letter_spacing'] . ";";
     echo "color: " . $h1_style['color'] . ";";
 echo "}";
-</pre>
+```
 
-<hr />
+## Screenshot
 
-<h2>Screenshot</h2>
 <img src="https://github.com/codespacing/cmb2-field-cs-typography/blob/master/cmb2-cs-typography.png" />
 
-<h2>Changelog</h2>
+## Changelog
 
 <h3>1.0</h3>
 <ul><li>Initial commit</li></ul>
