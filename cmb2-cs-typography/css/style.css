@@ -1,51 +1,56 @@
+.cs-typography-fields-toggle.cmb-row{
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
 .cs-field-label{
-	font-weight:400;
-	clear:both;
-	width: 100%;
+    font-weight:400;
+    clear:both;
+    width: 100%;
     display: inline-block;
-	padding:5px 0;	
+    padding:5px 0;	
 }
 
 .cs-typography-preview{
     padding: 15px;
-	margin:5px 0;
-	font-weight: 200;
+    margin:5px 0;
+    font-weight: 200;
     font-size: 14px;
     font-style: normal;	
-	background: #f7f7f7;
+    background: #f7f7f7;
     border-radius: 2px;
 }
 
 .cs-typography-element{
-	padding:5px;
-	box-sizing:border-box;
+    padding:5px;
+    box-sizing:border-box;
 }
 
 .cs-typography-element:nth-child(1),
 .cs-typography-element:nth-child(3n+1){
-	padding-left:0;
+    padding-left:0;
 }
 
 .cs-typography-element:nth-child(3n){
-	padding-right:0;
+    padding-right:0;
 }
 
 .cs-typography-element select{
-	margin:0 !important;
+    margin:0 !important;
 }
 
 .cs-typography-field{
-	padding-right:5px;
+    padding-right:5px;
 }
 
 .half-size{
-	width:calc(100% / 3);
-	float:left;
+    width:calc(100% / 3);
+    float:left;
 }	
 
 .cs-typography-field.half-size{
     box-sizing: border-box;
-	float:left;
+    float:left;
     width: 50% !important;
 }
 
@@ -53,16 +58,16 @@
 	
 	.cs-typography-element,
 	.cs-typography-field{
-		padding:0;
+	    padding:0;
 	}
 	
 	.half-size{
-		width:100%;
-		float:none;
+	    width:100%;
+	    float:none;
 	}	
 
 	.cs-typography-field.half-size:nth-child(2n+1){
-		padding-left:10px;
+	    padding-left:10px;
 	}
 
 }
