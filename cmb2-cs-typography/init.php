@@ -4,7 +4,7 @@
  * Plugin Name: CMB2 CS Typography Field
  * Plugin URI: 
  * Description: Typography field type for CMB2
- * Version: 1.0
+ * Version: 1.1
  * Author: Hicham Radi (CodeSpacing)
  * Author URI: https://www.codespacing.com/
  */
