@@ -15,7 +15,7 @@ if(!class_exists('CS_CMB2_Typography_Field')){
 		/**
 		 * Current version number */
 		 
-		const VERSION = '1.0';
+		const VERSION = '1.1';
 				
 		private $plugin_path;
 		private $plugin_url;
@@ -52,7 +52,7 @@ if(!class_exists('CS_CMB2_Typography_Field')){
 			 * Get the field options */
 			 
 			$field_options = $field->args('options');
-			
+					
 			/**
 			 * Typograpgy fields */
 	
@@ -66,6 +66,9 @@ if(!class_exists('CS_CMB2_Typography_Field')){
 					'text-orientation' => true,
 					'direction' => true,
 					'text-transform' => true,
+					'text-decoration-line' => true,
+					'text-decoration-style' => true,
+					'text-decoration-color' => true,
 					'font-style' => true,
 					'font-size' => true,
 					'line-height' => true,
@@ -73,6 +76,7 @@ if(!class_exists('CS_CMB2_Typography_Field')){
 					'color' => true,
 				),
 				'preview' => true,
+				'toggle' => true,
 			));
 			
 			$this->typography_fields = $this->typography_options['fields'];
@@ -82,299 +86,391 @@ if(!class_exists('CS_CMB2_Typography_Field')){
 			 
 			$this->cs_enqueue_scripts();
 			
-			?>
+			/**
+			 * Render */
 			
-			<div class="cs-typography-fields-container" data-field-id="<?php echo $field_id; ?>">
+			$inside_class = '';
+			 
+			if(is_bool($this->typography_options['toggle']) && $this->typography_options['toggle']){ 
 			
-				<?php
-				
-				/**
-				 * "Google Fonts" family */
-				
-				$this->cs_build_options_field(array(
-					'field_object' => $field_type_object,
-					'field_id' => $field_id,
-					'field_value' => $field_escaped_value,
-					'field_name' => 'google_font',
-					'field_label' => '<a href="https://fonts.google.com/" target="_blank">Google font family</a>',
-					'field_options' => $this->cs_google_fonts_list(),
-					'empty_option' => true,
-				)); 
-		
-				/**
-				 * Backup font family */
-				
-				$this->cs_build_options_field(array(
-					'field_object' => $field_type_object,
-					'field_id' => $field_id,
-					'field_value' => $field_escaped_value,
-					'field_name' => 'backup_font',
-					'field_label' => 'Backup font family',
-					'field_options' => array(
-						'auto' => 'auto',
-						'serif' => 'serif',
-						'sans-serif' => 'sans-serif',
-						'monospace' => 'monospace',
-						'cursive' => 'cursive',
-						'fantasy' => 'fantasy',
-						'system-ui' => 'system-ui',
-						'justify-all' => 'justify-all',
-						'match-parent' => 'match-parent',
-						'initial' => 'initial',
-						'unset' => 'unset',	
-						'none' => 'none',			
-					),
-					'empty_option' => true,
-				)); 
-		
-				/**
-				 * Font weight */
-				
-				$this->cs_build_options_field(array(
-					'field_object' => $field_type_object,
-					'field_id' => $field_id,
-					'field_value' => $field_escaped_value,
-					'field_name' => 'font_weight',
-					'field_label' => 'Font weight',
-					'field_options' => array(
-						'normal' => 'normal',
-						'bold' => 'bold',
-						'bolder' => 'bolder',
-						'lighter' => 'lighter',
-						'100' => '100',
-						'200' => '200',
-						'300' => '300',
-						'400' => '400',
-						'500' => '500',
-						'600' => '600',
-						'700' => '700',
-						'800' => '800',
-						'900' => '900',
-						'inherit' => 'inherit',
-						'initial' => 'initial',
-						'unset' => 'unset',				
-					),
-					'empty_option' => true,
-				)); 
-				
-				/**
-				 * Text align */
-				
-				$this->cs_build_options_field(array(
-					'field_object' => $field_type_object,
-					'field_id' => $field_id,
-					'field_value' => $field_escaped_value,
-					'field_name' => 'text_align',
-					'field_label' => 'Text align',
-					'field_options' => array(
-						'start' => 'start',
-						'end' => 'end',
-						'left' => 'left',
-						'right' => 'right',
-						'center' => 'center',
-						'justify' => 'justify',
-						'justify-all' => 'justify-all',
-						'match-parent' => 'match-parent',
-						'initial' => 'initial',
-						'unset' => 'unset',				
-					),
-					'empty_option' => true,
-				)); 
-		
-				/**
-				 * Writing mode */
-				
-				$this->cs_build_options_field(array(
-					'field_object' => $field_type_object,
-					'field_id' => $field_id,
-					'field_value' => $field_escaped_value,
-					'field_name' => 'writing_mode',
-					'field_label' => 'Writing mode',
-					'field_options' => array(
-						'horizontal-tb' => 'horizontal-tb',
-						'vertical-rl' => 'vertical-rl',
-						'vertical-lr' => 'vertical-lr',
-						'sideways-rl' => 'sideways-rl',
-						'sideways-lr' => 'sideways-lr',
-						'inherit' => 'inherit',
-						'initial' => 'initial',
-						'unset' => 'unset',				
-					),
-					'empty_option' => true,
-				)); 
-		
-				/**
-				 * Text orientation */
-				
-				$this->cs_build_options_field(array(
-					'field_object' => $field_type_object,
-					'field_id' => $field_id,
-					'field_value' => $field_escaped_value,
-					'field_name' => 'text_orientation',
-					'field_label' => 'Text orientation',
-					'field_options' => array(
-						'mixed' => 'mixed',
-						'upright' => 'upright',
-						'sideways' => 'sideways',
-						'sideways-right' => 'sideways-right',
-						'use-glyph-orientation' => 'use-glyph-orientation',
-						'inherit' => 'inherit',
-						'initial' => 'initial',
-						'unset' => 'unset',				
-					),
-					'empty_option' => true,
-				)); 
-				
-				/**
-				 * Text direction */
-				
-				$this->cs_build_options_field(array(
-					'field_object' => $field_type_object,
-					'field_id' => $field_id,
-					'field_value' => $field_escaped_value,
-					'field_name' => 'direction',
-					'field_label' => 'Text direction',
-					'field_options' => array(
-						'ltr' => 'ltr',
-						'rtl' => 'rtl',
-						'inherit' => 'inherit',
-						'initial' => 'initial',
-						'unset' => 'unset',				
-					),
-					'empty_option' => true,
-				)); 
-				
-				/**
-				 * Text transform */
-				
-				$this->cs_build_options_field(array(
-					'field_object' => $field_type_object,
-					'field_id' => $field_id,
-					'field_value' => $field_escaped_value,
-					'field_name' => 'text_transform',
-					'field_label' => 'Text transform',
-					'field_options' => array(
-						'none' => 'none',
-						'capitalize' => 'capitalize',
-						'uppercase' => 'uppercase',
-						'lowercase' => 'lowercase',
-						'inherit' => 'inherit',
-						'full-width' => 'full-width',
-						'full-size-kana' => 'full-size-kana',
-						'inherit' => 'inherit',
-						'initial' => 'initial',
-						'unset' => 'unset',				
-					),
-					'empty_option' => true,
-				)); 
-				
-				/**
-				 * Font style */
-				
-				$this->cs_build_options_field(array(
-					'field_object' => $field_type_object,
-					'field_id' => $field_id,
-					'field_value' => $field_escaped_value,
-					'field_name' => 'font_style',
-					'field_label' => 'Font style',
-					'field_options' => array(
-						'normal' => 'normal',
-						'italic' => 'italic',
-						'oblique' => 'oblique',
-						'inherit' => 'inherit',
-						'initial' => 'initial',
-						'unset' => 'unset',				
-					),
-					'empty_option' => true,
-				)); 
-				
-				/**
-				 * Font size */
-				
-				$this->cs_build_unit_field(array(
-					'field_object' => $field_type_object,
-					'field_id' => $field_id,
-					'field_value' => $field_escaped_value,
-					'field_name' => 'font_size',
-					'field_label' => 'Font size',
-					'empty_option' => false,
-				));
-				
-				/**
-				 * Line height */
-				
-				$this->cs_build_unit_field(array(
-					'field_object' => $field_type_object,
-					'field_id' => $field_id,
-					'field_value' => $field_escaped_value,
-					'field_name' => 'line_height',
-					'field_label' => 'Line height',
-					'empty_option' => true,
-				));
-				
-				/**
-				 * Letter spacing */
-				
-				$this->cs_build_unit_field(array(
-					'field_object' => $field_type_object,
-					'field_id' => $field_id,
-					'field_value' => $field_escaped_value,
-					'field_name' => 'letter_spacing',
-					'field_label' => 'Letter spacing',
-				));
-				
-				/**
-				 * Color */
-				
-				if(in_array('color', $this->typography_fields) && (is_bool($this->typography_fields['color']) && $this->typography_fields['color'])){ ?>
-					
-					<div class="cs-typography-element">
-						 
-						<label for="color" class="cs-field-label"><?php _e('Color', 'cs_typography'); ?></label>
-				
-						<div class="cs-typography-field full-size">
-							<?php 
-							echo $field_type_object->colorpicker(array(
-								'name' => $field_id . '[color]',
-								'desc' => '',
-								'id' => 'color',
-								'value' => isset($field_escaped_value['color']) ? $field_escaped_value['color'] : '',
-								'data-field-id' => $field_id,
-								'data-css-property' => 'color',
-							)); 
-							?>
-						</div>
-						
-					</div><?php
-					
-				}
-				
-				/**
-				 * Preview style */
-				 
-				if(is_bool($this->typography_options['preview']) && $this->typography_options['preview']){ ?>
-				
-					<div class="cs-typography-element">
-						 
-						<label class="cs-field-label"><?php _e('Perview text', 'cs_typography'); ?></label>
-					
-						<div class="cs-typography-preview" data-field-id="<?php echo $field_id; ?>" style=" <?php echo $this->cs_preview_css($field_escaped_value); ?> ">
-							Then came the night of the first falling star.<br />
-							0123456789
-						</div>
-					
-					</div><?php
-					
-				}
-				
-				?>
+				$inside_class = 'inside'; ?>
+
+            <div class="cs-typography-fields-toggle postbox cmb-row cmb-repeatable-grouping closed">
+                
+                <div class="cmbhandle" title="Click to toggle"><br></div>               
+                <h3 class="cmb-group-title cmbhandle-title"><?php _e('Toggle Typography Options', 'cs_typography'); ?></h3>
+
+            <?php } ?>
 			
-			</div>
-							
+                <div class="cs-typography-fields-container <?php echo $inside_class; ?>" data-field-id="<?php echo $field_id; ?>">
+                
+                    <?php
+                    
+                    /**
+                     * "Google Fonts" family */
+                    
+                    $this->cs_build_options_field(array(
+                        'field_object' => $field_type_object,
+                        'field_id' => $field_id,
+                        'field_value' => $field_escaped_value,
+                        'field_name' => 'google_font',
+                        'field_label' => '<a href="https://fonts.google.com/" target="_blank">Google font family</a>',
+                        'field_options' => $this->cs_google_fonts_list(),
+                        'empty_option' => true,
+                    )); 
+            
+                    /**
+                     * Backup font family */
+                    
+                    $this->cs_build_options_field(array(
+                        'field_object' => $field_type_object,
+                        'field_id' => $field_id,
+                        'field_value' => $field_escaped_value,
+                        'field_name' => 'backup_font',
+                        'field_label' => 'Backup font family',
+                        'field_options' => array(
+                            'auto' => 'auto',
+                            'serif' => 'serif',
+                            'sans-serif' => 'sans-serif',
+                            'monospace' => 'monospace',
+                            'cursive' => 'cursive',
+                            'fantasy' => 'fantasy',
+                            'system-ui' => 'system-ui',
+                            'justify-all' => 'justify-all',
+                            'match-parent' => 'match-parent',
+                            'initial' => 'initial',
+                            'unset' => 'unset',	
+                            'none' => 'none',			
+                        ),
+                        'empty_option' => true,
+                    )); 
+            
+                    /**
+                     * Font weight */
+                    
+                    $this->cs_build_options_field(array(
+                        'field_object' => $field_type_object,
+                        'field_id' => $field_id,
+                        'field_value' => $field_escaped_value,
+                        'field_name' => 'font_weight',
+                        'field_label' => 'Font weight',
+                        'field_options' => array(
+                            'normal' => 'normal',
+                            'bold' => 'bold',
+                            'bolder' => 'bolder',
+                            'lighter' => 'lighter',
+                            '100' => '100',
+                            '200' => '200',
+                            '300' => '300',
+                            '400' => '400',
+                            '500' => '500',
+                            '600' => '600',
+                            '700' => '700',
+                            '800' => '800',
+                            '900' => '900',
+                            'inherit' => 'inherit',
+                            'initial' => 'initial',
+                            'unset' => 'unset',				
+                        ),
+                        'empty_option' => true,
+                    )); 
+                    
+                    /**
+                     * Text align */
+                    
+                    $this->cs_build_options_field(array(
+                        'field_object' => $field_type_object,
+                        'field_id' => $field_id,
+                        'field_value' => $field_escaped_value,
+                        'field_name' => 'text_align',
+                        'field_label' => 'Text align',
+                        'field_options' => array(
+                            'start' => 'start',
+                            'end' => 'end',
+                            'left' => 'left',
+                            'right' => 'right',
+                            'center' => 'center',
+                            'justify' => 'justify',
+                            'justify-all' => 'justify-all',
+                            'match-parent' => 'match-parent',
+                            'initial' => 'initial',
+                            'unset' => 'unset',				
+                        ),
+                        'empty_option' => true,
+                    )); 
+            
+                    /**
+                     * Writing mode */
+                    
+                    $this->cs_build_options_field(array(
+                        'field_object' => $field_type_object,
+                        'field_id' => $field_id,
+                        'field_value' => $field_escaped_value,
+                        'field_name' => 'writing_mode',
+                        'field_label' => 'Writing mode',
+                        'field_options' => array(
+                            'horizontal-tb' => 'horizontal-tb',
+                            'vertical-rl' => 'vertical-rl',
+                            'vertical-lr' => 'vertical-lr',
+                            'sideways-rl' => 'sideways-rl',
+                            'sideways-lr' => 'sideways-lr',
+                            'inherit' => 'inherit',
+                            'initial' => 'initial',
+                            'unset' => 'unset',				
+                        ),
+                        'empty_option' => true,
+                    )); 
+            
+                    /**
+                     * Text orientation */
+                    
+                    $this->cs_build_options_field(array(
+                        'field_object' => $field_type_object,
+                        'field_id' => $field_id,
+                        'field_value' => $field_escaped_value,
+                        'field_name' => 'text_orientation',
+                        'field_label' => 'Text orientation',
+                        'field_options' => array(
+                            'mixed' => 'mixed',
+                            'upright' => 'upright',
+                            'sideways' => 'sideways',
+                            'sideways-right' => 'sideways-right',
+                            'use-glyph-orientation' => 'use-glyph-orientation',
+                            'inherit' => 'inherit',
+                            'initial' => 'initial',
+                            'unset' => 'unset',				
+                        ),
+                        'empty_option' => true,
+                    )); 
+                    
+                    /**
+                     * Text direction */
+                    
+                    $this->cs_build_options_field(array(
+                        'field_object' => $field_type_object,
+                        'field_id' => $field_id,
+                        'field_value' => $field_escaped_value,
+                        'field_name' => 'direction',
+                        'field_label' => 'Text direction',
+                        'field_options' => array(
+                            'ltr' => 'ltr',
+                            'rtl' => 'rtl',
+                            'inherit' => 'inherit',
+                            'initial' => 'initial',
+                            'unset' => 'unset',				
+                        ),
+                        'empty_option' => true,
+                    )); 
+                    
+                    /**
+                     * Text transform */
+                    
+                    $this->cs_build_options_field(array(
+                        'field_object' => $field_type_object,
+                        'field_id' => $field_id,
+                        'field_value' => $field_escaped_value,
+                        'field_name' => 'text_transform',
+                        'field_label' => 'Text transform',
+                        'field_options' => array(
+                            'none' => 'none',
+                            'capitalize' => 'capitalize',
+                            'uppercase' => 'uppercase',
+                            'lowercase' => 'lowercase',
+                            'inherit' => 'inherit',
+                            'full-width' => 'full-width',
+                            'full-size-kana' => 'full-size-kana',
+                            'inherit' => 'inherit',
+                            'initial' => 'initial',
+                            'unset' => 'unset',				
+                        ),
+                        'empty_option' => true,
+                    )); 
+                    
+                    /**
+                     * Font style */
+                    
+                    $this->cs_build_options_field(array(
+                        'field_object' => $field_type_object,
+                        'field_id' => $field_id,
+                        'field_value' => $field_escaped_value,
+                        'field_name' => 'font_style',
+                        'field_label' => 'Font style',
+                        'field_options' => array(
+                            'normal' => 'normal',
+                            'italic' => 'italic',
+                            'oblique' => 'oblique',
+                            'inherit' => 'inherit',
+                            'initial' => 'initial',
+                            'unset' => 'unset',				
+                        ),
+                        'empty_option' => true,
+                    )); 
+                    
+                    /**
+                     * Text decoration line */
+                    
+                    $this->cs_build_options_field(array(
+                        'field_object' => $field_type_object,
+                        'field_id' => $field_id,
+                        'field_value' => $field_escaped_value,
+                        'field_name' => 'text_decoration_line',
+                        'field_label' => 'Text decoration line',
+                        'field_options' => array(
+                            'none' => 'none',
+                            'underline' => 'underline',
+                            'overline' => 'overline',
+                            'line-through' => 'line-through',
+                            'underline overline' => 'underline overline',
+                            'underline line-through' => 'underline line-through',
+                            'overline line-through' => 'overline line-through',
+                            'underline overline line-through' => 'underline overline line-through',
+                            'inherit' => 'inherit',
+                            'initial' => 'initial',
+                            'unset' => 'unset',				
+                        ),
+                        'empty_option' => true,
+                    )); 
+                    
+                    /**
+                     * Text decoration style */
+                    
+                    $this->cs_build_options_field(array(
+                        'field_object' => $field_type_object,
+                        'field_id' => $field_id,
+                        'field_value' => $field_escaped_value,
+                        'field_name' => 'text_decoration_style',
+                        'field_label' => 'Text decoration style',
+                        'field_options' => array(
+                            'none' => 'none',
+                            'solid' => 'solid',
+                            'double' => 'double',
+                            'dotted' => 'dotted',
+                            'dashed' => 'dashed',						
+                            'wavy' => 'wavy',
+                            'inherit' => 'inherit',
+                            'initial' => 'initial',
+                            'unset' => 'unset',				
+                        ),
+                        'empty_option' => true,
+                    )); 
+                    
+                    /**
+                     * Text decoration color */
+                    
+                    if(in_array('text-decoration-color', $this->typography_fields) && (is_bool($this->typography_fields['text-decoration-color']) && $this->typography_fields['text-decoration-color'])){ ?>
+                        
+                        <div class="cs-typography-element half-size" style="margin-bottom: 13px;">
+                             
+                            <label for="text_decoration_color" class="cs-field-label"><?php _e('Text decoration color', 'cs_typography'); ?></label>
+                    
+                            <div class="cs-typography-field">
+                                <?php 
+                                echo $field_type_object->colorpicker(array(
+                                    'name' => $field_id . '[text_decoration_color]',
+                                    'desc' => '',
+                                    'id' => 'text_decoration_color',
+                                    'value' => isset($field_escaped_value['text_decoration_color']) ? $field_escaped_value['text_decoration_color'] : '',
+                                    'data-field-id' => $field_id,
+                                    'data-css-property' => 'text-decoration-color',
+                                )); 
+                                ?>
+                            </div>
+                            
+                        </div><?php
+                        
+                    }
+                    
+                    /**
+                     * Font size */
+                    
+                    $this->cs_build_unit_field(array(
+                        'field_object' => $field_type_object,
+                        'field_id' => $field_id,
+                        'field_value' => $field_escaped_value,
+                        'field_name' => 'font_size',
+                        'field_label' => 'Font size',
+                        'empty_option' => false,
+                    ));
+                    
+                    /**
+                     * Line height */
+                    
+                    $this->cs_build_unit_field(array(
+                        'field_object' => $field_type_object,
+                        'field_id' => $field_id,
+                        'field_value' => $field_escaped_value,
+                        'field_name' => 'line_height',
+                        'field_label' => 'Line height',
+                        'empty_option' => true,
+                    ));
+                    
+                    /**
+                     * Letter spacing */
+                    
+                    $this->cs_build_unit_field(array(
+                        'field_object' => $field_type_object,
+                        'field_id' => $field_id,
+                        'field_value' => $field_escaped_value,
+                        'field_name' => 'letter_spacing',
+                        'field_label' => 'Letter spacing',
+                    ));
+                    
+                    /**
+                     * Color */
+                    
+                    if(in_array('color', $this->typography_fields) && (is_bool($this->typography_fields['color']) && $this->typography_fields['color'])){ ?>
+                        
+                        <div class="cs-typography-element full-size">
+                             
+                            <label for="color" class="cs-field-label"><?php _e('Color', 'cs_typography'); ?></label>
+                    
+                            <div class="cs-typography-field">
+                                <?php 
+                                echo $field_type_object->colorpicker(array(
+                                    'name' => $field_id . '[color]',
+                                    'desc' => '',
+                                    'id' => 'color',
+                                    'value' => isset($field_escaped_value['color']) ? $field_escaped_value['color'] : '',
+                                    'data-field-id' => $field_id,
+                                    'data-css-property' => 'color',
+                                )); 
+                                ?>
+                            </div>
+                            
+                        </div><?php
+                        
+                    }
+                    
+                    /**
+                     * Preview style */
+                     
+                    if(is_bool($this->typography_options['preview']) && $this->typography_options['preview']){ ?>
+                    
+                        <div class="cs-typography-element full-size">
+                             
+                            <label class="cs-field-label"><?php _e('Perview text', 'cs_typography'); ?></label>
+                        
+                            <div class="cs-typography-preview" data-field-id="<?php echo $field_id; ?>" style=" <?php echo $this->cs_preview_css($field_escaped_value); ?> ">
+                                Then came the night of the first falling star.<br />
+                                0123456789
+                            </div>
+                        
+                        </div><?php
+                        
+                    }
+                    
+                    ?>
+                
+                </div>
+           			
+            <?php if(is_bool($this->typography_options['toggle']) && $this->typography_options['toggle']){ ?>
+				</div>
+            <?php } ?>
+            				
 			<?php         
 	
 			if(!empty($field->args('desc')))
-				echo '<p class="cmb2-metabox-description">'.$field->args('desc').'</p>';
+				echo '<p class="cmb2-metabox-description">'.$field->args('desc').'</p>'; 
 			
 		}
 		
@@ -703,4 +799,3 @@ if(!class_exists('CS_CMB2_Typography_Field')){
 	$CS_CMB2_typography_Field = new CS_CMB2_typography_Field();
 	
 }
-		
