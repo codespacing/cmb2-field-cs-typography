@@ -441,6 +441,12 @@ if(!class_exists('CS_CMB2_Typography_Field')){
                         
                     }
                     
+                    ?>
+                    
+                    <div style="clear:both;"></div>
+                    
+                    <?php										
+                    
                     /**
                      * Preview style */
                      
