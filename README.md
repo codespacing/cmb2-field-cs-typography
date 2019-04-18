@@ -10,21 +10,19 @@ $your_cmb_matabox->add_field(array(
 	'desc' => __( 'Field description', 'cmb2' ),
 	'type' => 'cs_typography',
 	'options' => array(
-		'fields' => array(
-			'google-font' => true,
-			'backup-font' => true,
-			'font-weight' => true,
-			'text-align' => true,
-			'writing-mode' => true,
-			'text-orientation' => true,
-			'direction' => true,
-			'text-transform' => true,
-			'font-style' => true,
-			'font-size' => true,
-			'line-height' => true,
-			'letter-spacing' => true,
-			'color' => true,
-		),
+		'google-font' => true,
+		'backup-font' => true,
+		'font-weight' => true,
+		'text-align' => true,
+		'writing-mode' => true,
+		'text-orientation' => true,
+		'direction' => true,
+		'text-transform' => true,
+		'font-style' => true,
+		'font-size' => true,
+		'line-height' => true,
+		'letter-spacing' => true,
+		'color' => true,
 		'preview' => true, // Show/Hide the "preview text" area
 		'toggle' => true, // Display all typography fields inside collapsible area
 	),
@@ -207,6 +205,9 @@ add_action('wp_enqueue_scripts', 'prefix_custom_typography');
 <img src="https://github.com/codespacing/cmb2-field-cs-typography/blob/master/cmb2-cs-typography.png" />
 
 ## Changelog
+
+<h3>1.2</h3>
+<ul><li>Changed the field options structure</li></ul>
 
 <h3>1.1</h3>
 <ul>
