@@ -15,13 +15,12 @@ if(!class_exists('CS_CMB2_Typography_Field')){
 		/**
 		 * Current version number */
 		 
-		const VERSION = '1.1';
+		const VERSION = '1.2';
 				
 		private $plugin_path;
 		private $plugin_url;
 		
 		public $typography_options;
-		public $typography_fields;
 	
 		/**
 		 * Initialize the plugin by hooking into CMB2
@@ -57,30 +56,26 @@ if(!class_exists('CS_CMB2_Typography_Field')){
 			 * Typograpgy fields */
 	
 			$this->typography_options = wp_parse_args($field_options, array(
-				'fields' => array(
-					'google-font' => true,
-					'backup-font' => true,
-					'font-weight' => true,
-					'text-align' => true,
-					'writing-mode' => true,
-					'text-orientation' => true,
-					'direction' => true,
-					'text-transform' => true,
-					'text-decoration-line' => true,
-					'text-decoration-style' => true,
-					'text-decoration-color' => true,
-					'font-style' => true,
-					'font-size' => true,
-					'line-height' => true,
-					'letter-spacing' => true,
-					'color' => true,
-				),
+				'google-font' => true,
+				'backup-font' => true,
+				'font-weight' => true,
+				'text-align' => true,
+				'writing-mode' => true,
+				'text-orientation' => true,
+				'direction' => true,
+				'text-transform' => true,
+				'text-decoration-line' => true,
+				'text-decoration-style' => true,
+				'text-decoration-color' => true,
+				'font-style' => true,
+				'font-size' => true,
+				'line-height' => true,
+				'letter-spacing' => true,
+				'color' => true,
 				'preview' => true,
 				'toggle' => true,
 			));
-			
-			$this->typography_fields = $this->typography_options['fields'];
-			
+
 			/**
 			 * Enqueue scripts & styles */
 			 
@@ -357,7 +352,7 @@ if(!class_exists('CS_CMB2_Typography_Field')){
                     /**
                      * Text decoration color */
                     
-                    if(in_array('text-decoration-color', $this->typography_fields) && (is_bool($this->typography_fields['text-decoration-color']) && $this->typography_fields['text-decoration-color'])){ ?>
+                    if(in_array('text-decoration-color', $this->typography_options) && (is_bool($this->typography_options['text-decoration-color']) && $this->typography_options['text-decoration-color'])){ ?>
                         
                         <div class="cs-typography-element half-size" style="margin-bottom: 13px;">
                              
@@ -418,7 +413,7 @@ if(!class_exists('CS_CMB2_Typography_Field')){
                     /**
                      * Color */
                     
-                    if(in_array('color', $this->typography_fields) && (is_bool($this->typography_fields['color']) && $this->typography_fields['color'])){ ?>
+                    if(in_array('color', $this->typography_options) && (is_bool($this->typography_options['color']) && $this->typography_options['color'])){ ?>
                         
                         <div class="cs-typography-element full-size">
                              
@@ -441,12 +436,12 @@ if(!class_exists('CS_CMB2_Typography_Field')){
                         
                     }
                     
-                    ?>
+					?>
                     
                     <div style="clear:both;"></div>
                     
-                    <?php										
-                    
+                    <?php
+										
                     /**
                      * Preview style */
                      
@@ -499,7 +494,7 @@ if(!class_exists('CS_CMB2_Typography_Field')){
 			
 			$css_property = str_replace('_', '-', $field_name);
 			
-			if(!in_array($css_property, $this->typography_fields) || (is_bool($this->typography_fields[$css_property]) && !$this->typography_fields[$css_property]))
+			if(!in_array($css_property, $this->typography_options) || (is_bool($this->typography_options[$css_property]) && !$this->typography_options[$css_property]))
 				return;
 				
 			?>
@@ -589,7 +584,7 @@ if(!class_exists('CS_CMB2_Typography_Field')){
 			
 			$css_property = str_replace('_', '-', $field_name);
 			
-			if(!in_array($css_property, $this->typography_fields) || (is_bool($this->typography_fields[$css_property]) && !$this->typography_fields[$css_property]))
+			if(!in_array($css_property, $this->typography_options) || (is_bool($this->typography_options[$css_property]) && !$this->typography_options[$css_property]))
 				return;
 				
 			?>
@@ -805,3 +800,4 @@ if(!class_exists('CS_CMB2_Typography_Field')){
 	$CS_CMB2_typography_Field = new CS_CMB2_typography_Field();
 	
 }
+		
